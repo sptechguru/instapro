@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %} Home page {% endblock title %}
+{% block content %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+<section class=" container-fluid  p-5 w-100">
+    <h1 class="text-white text-center font-weight-bold p-2 bg-danger ">ALL Posts </h1>
+    <center>
+        <form class="form-inline">
+            <input class="form-control mr-3" placeholder="Search" value="{{ request.GET.si }}" type="text" name="si" />
+            <br>
+            <input class="btn btn-success btn-md mr-3" type="submit" value="Search" />
+            <a class="btn btn-danger btn-md" href="/social/mypost/create"><span class="fa fa-plus"> CREATE POST</span></a>
+        </form>
+    </center>
+    <br>
+    <div class=" container w-100">
+        {% for n1 in mypost_list %}
+        <br>
+        <h5>
+            <span class="text-info text-center ml-2 font-weight-bold badge badge-pill badge-info">{{n1.cr_date|naturaltime }}</span></h5>
+        <div class="col-md-12 col-lg-12 col-sm-12 p-3">
+            <div class="card border border- border-rounded border-5 shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="media my-2">
+                    {% if n1.uploaded_by.pic %}
+                    <img style="width: 80px; height: 80px;" class="img-fluid img-thumbnail rounded-circle ml-3" src="/media/{{n1.uploaded_by.pic}}" />
+                    <div class="media-body  ml-3">
+                        <h5 class="mt-0 text-gray-dark ml-2 font-weight-bold text-uppercase">{{n1.uploaded_by}}</h5>
+                        <i class="ml-2 text-gray-dark font-weight-bold text-uppercase">{{n1.subject}}</i> <br>
+                        <i class="text-danger font-weight-bold ">Date {{n1.cr_date | date:"d/m/y"}}</i>
+                    </div>
+                    {% endif %}
+                </div>
+                <hr style="width: 100%; height: 2px; background-color: black;">
+                <!--     <hr>
+    <div class="container w-100">
+        <i class="text-center">{{n1.msg|safe|truncatechars:250}}</i>
+        </div>
+<hr>
+    -->
+                <div class="card ">
+                    <center class="bg-faded w-100">
+                        <div class="row">
+                            {% if n1.pic %}
+                            <div {% if n1.videofile %} class="col-md-8" {% else %} class="col-md-12" {% endif %}>
+                                <img class="img-fluid img-responsive img-thumbnail text-center w-100" src="/media/{{n1.pic}}" alt="pic upload" style="width:; height:450px;">
+                            </div>
+                            {% endif %}
+                            {% if n1.videofile %}
+                            <div {% if n1.pic %} class="col-md-4" {% else %} class="col-md-12" {% endif %}>
+                                <video style="height:450px;" class="img-fluid img-responsive img-thumbnail text-center w-100" controls="true">
+                                    }
+                                    <source src="/media/{{n1.videofile}}" type='video/mp4'>
+                                </video>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </center>
+                    <hr style="width: 100%; height: 2px; background-color: black;">
+                    <div class="card-body">
+                        <div id="like-section">
+                            {% include 'social/like_section.html' %}
+                            <a class="ml-2" href='/social/mypost/{{n1.id}}'><span class="far fa-comment fa-2x text-dark ml-2"></span></a>
+                            <a class="ml-3" href="http://wa.me/8839102688"><span class="fab fa-whatsapp fa-2x text-success"></span></a>
+                            {% if user.is_superuser %}
+                            <a class="" href='/social/mypost/delete/{{n1.id}}'><span class="fa fa-trash fa-2x text-danger"></span></a>
+                            {% endif %}
+                            <h4> <span class="badge badge-pill badge-dark">Likes {{n1.likedno}}</span> </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
