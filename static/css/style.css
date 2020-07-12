@@ -81,7 +81,7 @@
 
 
   .bgimag {
-      background-image: url({% static 'img/sp5.jpg' %});
+      background-image: url("https://www.dpsainiflorist.com/wp-content/uploads/2015/01/dp-saini-theme-bg.jpg");
       background-size: cover;
   }
 
