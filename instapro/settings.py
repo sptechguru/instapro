@@ -81,7 +81,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'palsantosh1698@gmail.com'
-EMAIL_HOST_PASSWORD = '199816pal'
+EMAIL_HOST_PASSWORD = 'xxxxxxxxx'
 
 
 # Database
